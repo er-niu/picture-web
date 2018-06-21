@@ -33,7 +33,7 @@ function loadPage(pageNum,pageSize){
         div += '<figure class="effect-oscar  wowload fadeInUp">';
         div += '<img src="'+urlSmall+'" alt="'+img.title+'"/>';
         div += '<figcaption>';
-        div += '<a href="'+urlBig+'" title="'+img.title+'" data-gallery>'+img.title+'</a>';
+        div += '<a href="'+urlBig+'" title="" data-gallery>'+img.title+'</a>';
         div += '<p>'+img.title+'</p>';
         div += '</figcaption>';
         div += '</figure>';

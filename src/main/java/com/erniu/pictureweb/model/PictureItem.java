@@ -40,6 +40,10 @@ public class PictureItem {
      */
     private long likeNum;
     /**
+     * 图片分类 0：小姐姐  1：小哥哥 2：动漫 3：风景
+     */
+    private int picType;
+    /**
      * 图片更新时间
      */
     private Date createTime;
