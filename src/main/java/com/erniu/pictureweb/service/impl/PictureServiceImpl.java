@@ -90,7 +90,7 @@ public class PictureServiceImpl implements PictureService {
 
             PictureItem item4 = new PictureItem();
             item4.setId(00005);
-            item4.setTitle("卡哇伊美女5");
+            item4.setTitle("卡哇伊美女4");
             item4.setBigUrl("https://wallpapers.wallhaven.cc/wallpapers/full/wallhaven-661505.jpg");
             item4.setSmallUrl("https://alpha.wallhaven.cc/wallpapers/thumb/small/th-661505.jpg");
             item4.setDesc("kawayi");
@@ -100,7 +100,7 @@ public class PictureServiceImpl implements PictureService {
 
             PictureItem item5 = new PictureItem();
             item5.setId(00006);
-            item5.setTitle("卡哇伊美女6");
+            item5.setTitle("卡哇伊美女5");
             item5.setBigUrl("https://wallpapers.wallhaven.cc/wallpapers/full/wallhaven-661506.jpg");
             item5.setSmallUrl("https://alpha.wallhaven.cc/wallpapers/thumb/small/th-661506.jpg");
             item5.setDesc("kawayi");
@@ -110,13 +110,29 @@ public class PictureServiceImpl implements PictureService {
 
             PictureItem item6 = new PictureItem();
             item6.setId(00007);
-            item6.setTitle("卡哇伊美女7");
-            item6.setBigUrl("https://wallpapers.wallhaven.cc/wallpapers/full/wallhaven-661507.jpg");
-            item6.setSmallUrl("https://alpha.wallhaven.cc/wallpapers/thumb/small/th-661507.jpg");
+            item6.setTitle("卡哇伊美女6");
+            item6.setBigUrl("https://wallpapers.wallhaven.cc/wallpapers/full/wallhaven-661489.jpg");
+            item6.setSmallUrl("https://alpha.wallhaven.cc/wallpapers/thumb/small/th-661489.jpg");
             item6.setDesc("kawayi");
             item6.setLength(3000);
             item6.setWidth(2000);
             item6.setCreateTime(new Date());
+
+            PictureItem item7 = new PictureItem();
+            item7.setId(00007);
+            item7.setTitle("卡哇伊美女7");
+            item7.setBigUrl("https://wallpapers.wallhaven.cc/wallpapers/full/wallhaven-661500.jpg");
+            item7.setSmallUrl("https://alpha.wallhaven.cc/wallpapers/thumb/small/th-661500.jpg");
+            item7.setDesc("kawayi");
+            item7.setLength(3000);
+            item7.setWidth(2000);
+            item7.setCreateTime(new Date());
+
+            PictureItem item9 = new PictureItem();
+            item9.setId(00007);
+            item9.setTitle("卡哇伊美女9");
+            item9.setBigUrl("https://wallpapers.wallhaven.cc/wallpapers/full/wallhaven-661494.jpg");
+            item9.setSmallUrl("https://alpha.wallhaven.cc/wallpapers/thumb/small/th-661494.jpg");
 
             ruleList.add(item);
             ruleList.add(item1);
@@ -125,6 +141,10 @@ public class PictureServiceImpl implements PictureService {
             ruleList.add(item4);
             ruleList.add(item5);
             ruleList.add(item6);
+            ruleList.add(item7);
+            ruleList.add(item9);
+
+
             totalNumber = 10;
         } catch (Exception e) {
             LOGGER.error("read picture form db failed",e);
