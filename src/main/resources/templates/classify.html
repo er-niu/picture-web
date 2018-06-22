@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8"/>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
@@ -129,25 +129,26 @@
 <!-- custom script -->
 <script src="assets/script.js"></script>
 <script src="assets/loadPic.js"></script>
-<script type="text/javascript">
-var pageNum = 1;//页码
-var pageSize = 10;//单页显示图片个数
-$(function(){
-    //初始化加载
-    loadPage(pageNum,pageSize);
-    //initPicNum();
-    //滚动到底部触发加载
-    $(window).scroll(function(event){
-        var wScrollY = !!window.scrollY ? window.scrollY : window.pageYOffset; // 当前滚动条位置
-        var wInnerH = window.innerHeight; // 设备窗口的高度（不会变）
-        var bScrollH = document.body.scrollHeight; // 滚动条总高度
-        if (wScrollY + wInnerH >= bScrollH * 0.95) { // 修正为滚动到90%即加载，避免个别设备出现奇怪的 wScrollY + wInnerH < bScrollH 的现象
-            pageNum ++;
-            loadPage(pageNum,pageSize);
-        }
+<script th:inline="javascript">
+	var picType = [[${picType}]];
+	$('#picType'+picType).addClass('active');
+	var pageNum = 1;//页码
+    var pageSize = 10;//单页显示图片个数
+    $(function(){
+        //初始化加载
+        loadPageByType(picType,pageNum,pageSize);
+        //滚动到底部触发加载
+        $(window).scroll(function(event){
+            var wScrollY = !!window.scrollY ? window.scrollY : window.pageYOffset; // 当前滚动条位置
+            var wInnerH = window.innerHeight; // 设备窗口的高度（不会变）
+            var bScrollH = document.body.scrollHeight; // 滚动条总高度
+            if (wScrollY + wInnerH >= bScrollH * 0.95) { // 修正为滚动到90%即加载，避免个别设备出现奇怪的 wScrollY + wInnerH < bScrollH 的现象
+                pageNum ++;
+                loadPageByType(picType,pageNum,pageSize);
+            }
+        });
+        //mAlert('欢迎使用极简壁纸 <br>按 Ctrl+D 可以收藏到浏览器');
     });
-    //mAlert('欢迎使用极简壁纸 <br>按 Ctrl+D 可以收藏到浏览器');
-});
 </script>
 </body>
 </html>

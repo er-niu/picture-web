@@ -6,34 +6,50 @@ import org.apache.ibatis.annotations.*;
 import java.util.List;
 
 /**
- * Created by songxiao on 2018/6/22.
+ * Created by erniu on 2018/6/22.
  */
 public interface PictureItemMapper {
 
+    @Select("SELECT * FROM picture_item WHERE id = #{id}")
+    PictureItem getById(Long id);
 
-    @Select("SELECT * FROM users")
-    @Results({
-            @Result(property = "userSex",  column = "user_sex"),
-            @Result(property = "nickName", column = "nick_name")
-    })
-    List<PictureItem> getAll();
+    @Select("<script>"
+            + "SELECT * FROM `picture_item`"
+            + "<where>"
+            + "<if test='title != null'>"
+            + "<bind name='title' value=\"'%' + title + '%'\" />"
+            + " AND title like #{title}"
+            + "</if>"
+            + "<if test='picType !=null'>AND pic_type = #{picType}</if>"
+            + "</where>"
+            + "ORDER BY id DESC LIMIT #{minIndex},#{pageSize}"
+            + "</script>")
+    List<PictureItem> getChosenPic(@Param(value = "title") String title, @Param(value = "picType") Integer picType,
+                                   @Param(value = "minIndex") Integer minIndex, @Param(value = "pageSize") Integer pageSize);
 
-    @Select("SELECT * FROM users WHERE id = #{id}")
-    @Results({
-            @Result(property = "userSex",  column = "user_sex"),
-            @Result(property = "nickName", column = "nick_name")
-    })
-    PictureItem getOne(Long id);
+    @Select("<script>"
+            + "SELECT COUNT(1) FROM `picture_item`"
+            + "<where>"
+            + "<if test='title != null'>"
+            + "<bind name='title' value=\"'%' + title + '%'\" />"
+            + "AND title like #{title}"
+            + "</if>"
+            + "<if test='picType !=null'>AND pic_type = #{picType}</if>"
+            + "</where>"
+            + "</script>")
+    Integer getPicCount(@Param(value = "title") String title, @Param(value = "picType") Integer picType,
+                        @Param(value = "minIndex") Integer minIndex, @Param(value = "pageSize") Integer pageSize);
 
-    @Insert("INSERT INTO users(userName,passWord,user_sex) VALUES(#{userName}, #{passWord}, #{userSex})")
+    @Insert("INSERT INTO picture_item(title,pic_desc,big_url,small_url,length,width,like_num,pic_type,create_time)" +
+            "VALUES(#{title}, #{picDesc}, #{bigUrl}, #{smallUrl}, #{length}, #{width}, #{likeNum}, #{picType}, #{createTime})")
     void insert(PictureItem user);
 
-    @Update("UPDATE users SET userName=#{userName},nick_name=#{nickName} WHERE id =#{id}")
+    @Update("UPDATE picture_item SET title=#{title},pic_desc=#{picDesc},big_url=#{bigUrl},small_url=#{smallUrl}," +
+            "length=#{length},width=#{width},like_num=#{likeNum},pic_type=#{picType},create_time=#{createTime} WHERE id =#{id}")
     void update(PictureItem user);
 
-    @Delete("DELETE FROM users WHERE id =#{id}")
+    @Delete("DELETE FROM picture_item WHERE id =#{id}")
     void delete(Long id);
-
 
 
 }

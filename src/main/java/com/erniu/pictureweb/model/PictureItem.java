@@ -9,7 +9,7 @@ import java.util.Date;
  */
 @Data
 public class PictureItem {
-    private long id;
+    private Long id;
     /**
      * 图片标题
      */
@@ -17,13 +17,13 @@ public class PictureItem {
     /**
      * 图片介绍
      */
-    private String desc;
+    private String picDesc;
     /**
      * 大图utl地址
      */
     private String bigUrl;
     /**
-     * 缩略图url地址
+     * 缩略图url地址;
      */
     private String smallUrl;
     /**
