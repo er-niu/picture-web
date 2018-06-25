@@ -31,7 +31,7 @@ function loadPageByType(picType,pageNum,pageSize){
 	$.ajax({
 	    type: 'POST',
         url: url,
-        dataType: "json",
+        dataType: "jsonp",
         data: {picType:picType,pageNum:pageNum,pageSize:pageSize},
         async: false,
         cache:false,
