@@ -1,6 +1,6 @@
 /** pageNum 页码 pageSize 一页显示几张 json 数据源 type 区分加载方式 */
 function loadPage(pageNum,pageSize){
-    var url = 'http://118.24.51.89:8080/chosen/picture/' + pageNum + '/' + pageSize;
+    var url = 'http://yywallpaper.top/chosen/picture/' + pageNum + '/' + pageSize;
     var json = getPicture(url)
     var picList = json.elements;
 	for (var i = 0; i < pageSize && i < picList.length; i++) {
@@ -26,7 +26,7 @@ function loadPage(pageNum,pageSize){
 
 /** pageNum 页码 pageSize 一页显示几张 json 数据源 type 区分加载方式 */
 function loadPageByType(picType,pageNum,pageSize){
-    var url = 'http://118.24.51.89:8080/query/picture';
+    var url = 'http://yywallpaper.top/query/picture';
 	var result = null;
 	$.ajax({
 	    type: 'POST',
