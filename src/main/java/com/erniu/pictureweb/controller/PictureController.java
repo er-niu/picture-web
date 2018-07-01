@@ -34,7 +34,7 @@ public class PictureController {
     @GetMapping("/chosen/picture/{pageNum}/{pageSize}")
     public Object findChosenPic(@PathVariable Integer pageNum, @PathVariable Integer pageSize) {
         LOGGER.debug("-----received param pageNum:{},pageSize:{}", pageNum, pageSize);
-        PageImpl<PictureItem> picList = pictureService.getChosenPic(null, null, pageNum, pageSize);
+        PageImpl<PictureItem> picList = pictureService.getChosenPic(null, 0, pageNum, pageSize);
         return JSON.toJSON(picList);
     }
 
