@@ -71,7 +71,8 @@
 
                     <ul class="nav navbar-nav navbar-right">
                         <li><a href="/classify/1">我的</a></li>
-                        <li><a href="/classify/2">关于</a></li>
+                        <li><a href="#" data-toggle="modal" data-target="#modal2">关于</a></li>
+                        <li><a href="#" data-toggle="modal" data-target="#modal1"> 打赏 </a></li>
                     </ul>
                 </div>
                 <!-- #Nav Ends -->
@@ -113,6 +114,65 @@
     <!-- The modal dialog, which will be used to wrap the lightbox content -->
 </div>
 
+<!-- 模态框（Modal） -->
+<div class="modal fade" id="modal1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"> &times; </button>
+                <h4 class="modal-title" id="myModalLabel1"> 打赏 </h4>
+            </div>
+            <div class="modal-body" style="margin: 20;min-height: 400px;">
+                <p style="font-size: 16px;text-align: center;">
+                    扫描下方二维码可以打赏一下网站撸主
+                    <br/>本站初心❤❤❤只愿把美图壁纸分享给大家❤❤❤
+                    <br/>为了把壁纸的美好带给大家，攻城狮小哥花费了很多个人时间和精力进行开发，甚至咬牙掏钱买了三年的服务器，看攻城狮小哥这么可怜，快来打赏杯咖啡吧。≡ω≡
+                    <br/>由衷的感谢
+                    <!-- <br/><span id="dsNum"></span> -->
+                </p>
+                <div class="col-md-6 col-sm-6" style="text-align: center;">
+                    <img src="images/wechat.jpeg" width="160" height="160" style="margin: 0px 30px;"/>
+                    <p style="font-weight: bold;font-size: 16px;text-align: center;margin: 0px 30px;">
+                        微信赞赏
+                    </p>
+                </div>
+                <div class="col-md-6 col-sm-6" style="text-align: center;">
+                    <img src="images/alipay.jpeg" width="160" height="160" style="margin: 0px 30px;"/>
+                    <p style="font-weight: bold;font-size: 16px;text-align: center;margin: 0px 30px;">
+                        支付宝
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal fade" id="modal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"> &times; </button>
+                <h4 class="modal-title" id="myModalLabel"> 关于 </h4>
+            </div>
+            <div class="modal-body">
+                <p style="font-size: 16px">
+                    &nbsp;&nbsp;&nbsp;&nbsp;应有壁纸是由个人开发维护的网站。本站分为三部分：1. 前端基于h5框架bootstrap开发,完成壁纸展示和动态页面特效 2. java后台部分使用SpringBoot+Thymeleaf，提供http接口完成壁纸搜索 3. python爬虫部分功能为定时爬取壁纸，并将壁纸上传至文件服务器。
+                    <br/>&nbsp;&nbsp;&nbsp;&nbsp;1. 前端基于h5框架bootstrap开发,完成壁纸展示和动态页面特效
+                    <br/>&nbsp;&nbsp;&nbsp;&nbsp;2. java后台部分使用SpringBoot+Thymeleaf，提供http接口完成壁纸搜索
+                    <br/>&nbsp;&nbsp;&nbsp;&nbsp;3. python爬虫部分功能为定时爬取壁纸，并将壁纸上传至图片服务器。
+                    <br/>&nbsp;&nbsp;&nbsp;&nbsp;图片服务器使用Fastdfs+Nginx搭建，想了解技术细节的可以联系我，一起探讨呦~
+                    <br/>
+                    <br/>&nbsp;&nbsp;&nbsp;&nbsp;免责声明：图片均来源于网络，仅供学习交流，版权归原作者所有，并不代表本站观点。如果有侵犯到您的权利，请及时联系我们删除。
+                    <br/><br/>&nbsp;&nbsp;&nbsp;&nbsp;作者的联系方式
+                    <br/>&nbsp;&nbsp;&nbsp;&nbsp;邮箱:niuvip6688@163.com
+                    <br/>&nbsp;&nbsp;&nbsp;&nbsp;博客:<a href="https://blog.csdn.net/u010028869">https://blog.csdn.net/u010028869</a>
+                    <br/><br/>&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-size:12px;">Designed by erniu  &  Pictures from internet</span>
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
 
 <!-- jquery -->
 <script th:src="@{/assets/jquery.js}"></script>
