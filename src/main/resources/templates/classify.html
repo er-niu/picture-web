@@ -11,7 +11,7 @@
     <link href='http://fonts.googleapis.com/css?family=Roboto:400,300,700' rel='stylesheet' type='text/css'>
     -->
     <!-- font awesome -->
-    <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <!--<link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">-->
     <!-- bootstrap -->
     <link rel="stylesheet" th:href="@{/assets/bootstrap/css/bootstrap.min.css}"/>
     <!-- animate.css -->
@@ -22,7 +22,9 @@
     <!-- favicon -->
     <link rel="shortcut icon" th:href="@{/images/favicon.ico}" type="image/x-icon">
     <link rel="icon" th:href="@{/images/favicon.ico}" type="image/x-icon">
+    <link rel="stylesheet" type="text/css" th:href="@{/assets/heart.css}">
     <link rel="stylesheet" th:href="@{/assets/style.css}">
+    <link rel="stylesheet" th:href="@{/assets/spop.min.css}">
     <style type="text/css">
         .font-style{
             color:#666;
@@ -188,6 +190,7 @@
 <!-- custom script -->
 <script th:src="@{/assets/script.js}"></script>
 <script th:src="@{/assets/loadPic.js}"></script>
+<script th:src="@{/assets/spop.min.js}"></script>
 <script th:inline="javascript">
 	var picType = [[${picType}]];
 	$('#picType'+picType).addClass('active');

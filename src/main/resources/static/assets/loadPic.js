@@ -1,3 +1,5 @@
+var local_storage_key = "yywallpaper"
+
 /** pageNum 页码 pageSize 一页显示几张 json 数据源 type 区分加载方式 */
 function loadPage(pageNum,pageSize){
     var url = 'http://118.24.51.89/chosen/picture/' + pageNum + '/' + pageSize;
@@ -5,9 +7,9 @@ function loadPage(pageNum,pageSize){
     var picList = json.elements;
 	for (var i = 0; i < pageSize && i < picList.length; i++) {
 		var img = picList[i];
-
 		var urlSmall = img.smallUrl;
 		var urlBig = img.bigUrl;
+		var imgId = img.id;
 		var div = "";
 
         div += '<figure class="effect-oscar  wowload fadeInUp">';
@@ -16,6 +18,14 @@ function loadPage(pageNum,pageSize){
         div += '<a href="'+urlBig+'" title="" data-gallery>'+img.title+'</a>';
         div += '<p>'+img.title+'</p>';
         div += '</figcaption>';
+
+        // 加小心心
+        if(loadStorage().indexOf(imgId.toString()) >= 0){
+            div += '<div id="heart'+imgId+'" class="heart heartAnimation" rel="unlike" onclick="beatDemo('+imgId+')" style="background-position: right;" ></div>';
+        }else{
+            div += '<div id="heart'+imgId+'" class="heart" rel="like" onclick="beatDemo('+imgId+')"></div>';
+        }
+
         div += '</figure>';
 
 		$('#works').append(div);
@@ -44,6 +54,7 @@ function loadPageByType(picType,pageNum,pageSize){
 		var img = picList[i];
 		var urlSmall = img.smallUrl;
 		var urlBig = img.bigUrl;
+	    var imgId = img.id;
 		var div = "";
 
         div += '<figure class="effect-oscar  wowload fadeInUp">';
@@ -52,6 +63,14 @@ function loadPageByType(picType,pageNum,pageSize){
         div += '<a href="'+urlBig+'" title="" data-gallery>'+img.title+'</a>';
         div += '<p>'+img.title+'</p>';
         div += '</figcaption>';
+
+        // 加小心心
+        if(loadStorage().indexOf(imgId.toString()) >= 0){
+            div += '<div id="heart'+imgId+'" class="heart heartAnimation" rel="unlike" onclick="beatDemo('+imgId+')" style="background-position: right;" ></div>';
+        }else{
+            div += '<div id="heart'+imgId+'" class="heart" rel="like" onclick="beatDemo('+imgId+')"></div>';
+        }
+
         div += '</figure>';
 
 		$('#works').append(div);
@@ -84,4 +103,65 @@ function getQueryVariable(variable){
             if(pair[0] == variable){return pair[1];}
     }
     return(false);
+}
+
+function beatDemo(imgId){
+	var heart = $('#heart'+imgId).attr("rel");
+    if(heart == 'like') {
+        $('#heart'+imgId).addClass("heartAnimation").attr("rel","unlike");
+        $('#heart'+imgId).css("background-position","right");
+        addPicToStorage(imgId);
+        mAlert('图片已收藏到 \"我的\"','success',1500);
+    }else{
+        $('#heart'+imgId).removeClass("heartAnimation").attr("rel","like");
+        $('#heart'+imgId).css("background-position","left");
+        removePicFromStorage(imgId);
+    }
+}
+
+/** 读取数据，浏览器缓存信息 */
+function loadStorage(){
+	var storage = localStorage.getItem(local_storage_key);
+	if(storage == null || storage == undefined || storage == "")
+		storage = new Array();
+	else
+		storage = storage.split(",")
+	return storage;
+}
+
+/** 新增一个img到本地存储 */
+function addPicToStorage(imgId){
+	var storage = loadStorage();
+	if(storage.indexOf(imgId.toString()) < 0){
+		storage.unshift(imgId);
+		saveStorage(storage);
+	}
+}
+
+/** 从本地存储移除元素 */
+function removePicFromStorage(imgId){
+	var storage = loadStorage();
+	var img_index = storage.indexOf(imgId.toString());
+	if (img_index > -1) {
+        storage.splice(img_index, 1);
+    }
+	saveStorage(storage);
+}
+
+function saveStorage(storage){
+	value = JSON.stringify(storage)
+	localStorage.setItem(local_storage_key, storage);
+}
+
+/**
+ * text 消息 // 可以带h4等标签
+ * style：状态 info success warning error //默认info
+ * position：位置 top-right top-left top-center bottom-left bottom-center bottom-right //默认top-center
+ * autoclose：自动关闭时间 //默认3秒
+ */
+function mAlert(text,style,times){
+	if(!style) style = 'info';
+	if(!times) times = 3000;
+	//详细用法百度 smallPop
+	spop({template: text,style: style, position: 'top-center',autoclose: times});
 }
