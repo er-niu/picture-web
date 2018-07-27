@@ -79,7 +79,48 @@ function loadPageByType(picType,pageNum,pageSize){
 	//baguetteBox.run('.tz-gallery');
 }
 
+/** pageNum 页码 pageSize 一页显示几张 json 数据源 type 区分加载方式 */
+function loadLikePic(json,pageNum,pageSize){
+	for (var i = pageNum * pageSize; i < (pageNum + 1) * pageSize && i < json.length; i++) {
+	    mAlert(json[i])
+        var imgId = json[i];
+        //var url = 'http://118.24.51.89/picture/' + parseInt(imgId);
+        var url = 'http://118.24.51.89/picture/1695';
+        //var img = getPicture(url);
+        var img;
+        $.get(url,function(data,status){
+            mAlert("Data: " + data,'success',30500);
+            img = data[0];
+            mAlert(img)
+        });
+        var urlSmall = img.smallUrl;
+        var urlBig = img.bigUrl;
+        var div = "";
+
+        div += '<figure class="effect-oscar  wowload fadeInUp">';
+        div += '<img src="'+urlSmall+'" alt="'+img.title+'"/>';
+        div += '<figcaption>';
+        div += '<a href="'+urlBig+'" title="" data-gallery>'+img.title+'</a>';
+        div += '<p>'+img.title+'</p>';
+        div += '</figcaption>';
+
+        // 加小心心
+        if(loadStorage().indexOf(imgId.toString()) >= 0){
+            div += '<div id="heart'+imgId+'" class="heart heartAnimation" rel="unlike" onclick="beatDemo('+imgId+')" style="background-position: right;" ></div>';
+        }else{
+            div += '<div id="heart'+imgId+'" class="heart" rel="like" onclick="beatDemo('+imgId+')"></div>';
+        }
+
+        div += '</figure>';
+
+        $('#works').append(div);
+	}
+	//初始化baguetteBox
+	//baguetteBox.run('.tz-gallery');
+}
+
 function getPicture(url){
+	mAlert("123123123=="+url)
 	var result = null;
 	$.ajax({
 	    type: "get",
@@ -88,6 +129,7 @@ function getPicture(url){
         async: false,
         cache:false,
         success: function(json) {
+            mAlert("json=="+json)
 	    	result = json;
 	    }
     });

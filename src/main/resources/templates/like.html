@@ -31,7 +31,6 @@
             font-size:15px;
             font-family : 微软雅黑,宋体, 'New York';
         }
-
     </style>
 </head>
 
@@ -75,7 +74,7 @@
                     </ul>
 
                     <ul class="nav navbar-nav navbar-right">
-                        <li><a class="font-style" href="/like">我的</a></li>
+                        <li><a class="font-style" id="likePic" href="/like">我的</a></li>
                         <li><a class="font-style" href="#" data-toggle="modal" data-target="#modal2">关于</a></li>
                         <li><a class="font-style" href="#" data-toggle="modal" data-target="#modal1"> 打赏 </a></li>
                     </ul>
@@ -195,13 +194,23 @@
 <script th:src="@{/assets/loadPic.js}"></script>
 <script th:src="@{/assets/spop.min.js}"></script>
 <script th:inline="javascript">
-	var picType = [[${picType}]];
-	$('#picType'+picType).addClass('active');
-	var pageNum = 1;//页码
+	$("#likePic").addClass('active');
+	var json = loadStorage();//数据源
+	if(json == null || json == undefined || json == "" || json.length == 0){
+		var div = '';
+		div += '<div style="text-align:center;margin: 30px auto;font-size: 22px;color: #85878c;">';
+		div += '<p>啊哦...这里空空如也 >_<|||</p>'
+		div += '<p>您可以点击图片右下角的小心心❤❤❤</p>'
+		div += '<p>将美图收入囊中哦</p>'
+		div += '<div id="heart0" class="heart" rel="like" style="position: static;display: inline-block;height: 100px;width: 100px;" onclick="beatDemo(0)"></div>';
+		div += '</div>';
+		$('#main').append(div);
+	}
+	var pageNum = 0;//页码
     var pageSize = 10;//单页显示图片个数
     $(function(){
         //初始化加载
-        loadPageByType(picType,pageNum,pageSize);
+        loadLikePic(json,pageNum,pageSize);
         //滚动到底部触发加载
         $(window).scroll(function(event){
             var wScrollY = !!window.scrollY ? window.scrollY : window.pageYOffset; // 当前滚动条位置
@@ -209,7 +218,7 @@
             var bScrollH = document.body.scrollHeight; // 滚动条总高度
             if (wScrollY + wInnerH >= bScrollH * 0.95) { // 修正为滚动到90%即加载，避免个别设备出现奇怪的 wScrollY + wInnerH < bScrollH 的现象
                 pageNum ++;
-                loadPageByType(picType,pageNum,pageSize);
+                loadLikePic(json,pageNum,pageSize);
             }
         });
         //mAlert('欢迎使用极简壁纸 <br>按 Ctrl+D 可以收藏到浏览器');

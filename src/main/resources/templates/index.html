@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8"/>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
@@ -63,17 +63,21 @@
                 <div class="navbar-collapse  collapse">
                     <ul class="nav navbar-nav">
                         <li class="active font-style"><a href="/">精选</a></li>
-                        <li class="font-style" id="picType0"><a href="/classify/0">小姐姐</a></li>
+                        <li class="font-style" th:each="type : ${typeList}" th:id="|picType${type.id}|">
+                            <a th:href="|/classify/${type.id}|" th:text="${type.typeName}"></a>
+                        </li>
+
+                        <!--<li class="font-style" id="picType0"><a href="/classify/0">小姐姐</a></li>
                         <li class="font-style" id="picType5"><a href="/classify/5">小哥哥</a></li>
                         <li class="font-style" id="picType3"><a href="/classify/3">动漫</a></li>
                         <li class="font-style" id="picType1"><a href="/classify/1">风景</a></li>
                         <li class="font-style" id="picType2"><a href="/classify/2">唯美</a></li>
                         <li class="font-style" id="picType10"><a href="/classify/10">汽车</a></li>
-                        <li class="font-style" id="picType15"><a href="/classify/15">王者荣耀</a></li>
+                        <li class="font-style" id="picType15"><a href="/classify/15">王者</a></li>-->
                     </ul>
 
                     <ul class="nav navbar-nav navbar-right">
-                        <li><a class="font-style" href="/">我的</a></li>
+                        <li><a class="font-style" href="/like">我的</a></li>
                         <li><a class="font-style" href="#" data-toggle="modal" data-target="#modal2">关于</a></li>
                         <li><a class="font-style" href="#" data-toggle="modal" data-target="#modal1"> 打赏 </a></li>
                     </ul>
