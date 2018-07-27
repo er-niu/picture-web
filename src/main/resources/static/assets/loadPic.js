@@ -2,7 +2,7 @@ var local_storage_key = "yywallpaper"
 
 /** pageNum 页码 pageSize 一页显示几张 json 数据源 type 区分加载方式 */
 function loadPage(pageNum,pageSize){
-    var url = 'http://118.24.51.89/chosen/picture/' + pageNum + '/' + pageSize;
+    var url = 'http://yywallpaper.top/chosen/picture/' + pageNum + '/' + pageSize;
     var json = getPicture(url)
     var picList = json.elements;
 	for (var i = 0; i < pageSize && i < picList.length; i++) {
@@ -36,7 +36,7 @@ function loadPage(pageNum,pageSize){
 
 /** pageNum 页码 pageSize 一页显示几张 json 数据源 type 区分加载方式 */
 function loadPageByType(picType,pageNum,pageSize){
-    var url = 'http://118.24.51.89/query/picture';
+    var url = 'http://yywallpaper.top/query/picture';
 	var result = null;
 	$.ajax({
 	    type: 'POST',
@@ -82,17 +82,9 @@ function loadPageByType(picType,pageNum,pageSize){
 /** pageNum 页码 pageSize 一页显示几张 json 数据源 type 区分加载方式 */
 function loadLikePic(json,pageNum,pageSize){
 	for (var i = pageNum * pageSize; i < (pageNum + 1) * pageSize && i < json.length; i++) {
-	    mAlert(json[i])
         var imgId = json[i];
-        //var url = 'http://118.24.51.89/picture/' + parseInt(imgId);
-        var url = 'http://118.24.51.89/picture/1695';
-        //var img = getPicture(url);
-        var img;
-        $.get(url,function(data,status){
-            mAlert("Data: " + data,'success',30500);
-            img = data[0];
-            mAlert(img)
-        });
+        var url = 'http://yywallpaper.top/picture/' + parseInt(imgId);
+        var img = getPicture(url);
         var urlSmall = img.smallUrl;
         var urlBig = img.bigUrl;
         var div = "";
@@ -120,7 +112,6 @@ function loadLikePic(json,pageNum,pageSize){
 }
 
 function getPicture(url){
-	mAlert("123123123=="+url)
 	var result = null;
 	$.ajax({
 	    type: "get",
@@ -129,7 +120,6 @@ function getPicture(url){
         async: false,
         cache:false,
         success: function(json) {
-            mAlert("json=="+json)
 	    	result = json;
 	    }
     });

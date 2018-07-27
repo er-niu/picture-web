@@ -26,9 +26,9 @@ public class PictureController {
     private PictureService pictureService;
 
     @GetMapping("/picture/{id}")
-    public String findById(@PathVariable Long id) {
+    public Object findById(@PathVariable Long id) {
         PictureItem pictureItem = pictureService.getPicById(id);
-        return pictureItem.toString();
+        return JSON.toJSON(pictureItem);
     }
 
     @GetMapping("/chosen/picture/{pageNum}/{pageSize}")
