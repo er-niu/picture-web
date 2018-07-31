@@ -167,6 +167,8 @@ function addPicToStorage(imgId){
 	if(storage.indexOf(imgId.toString()) < 0){
 		storage.unshift(imgId);
 		saveStorage(storage);
+        var url = 'http://yywallpaper.top/like/picture/' + parseInt(imgId);
+        getPicture(url);
 	}
 }
 
@@ -178,6 +180,8 @@ function removePicFromStorage(imgId){
         storage.splice(img_index, 1);
     }
 	saveStorage(storage);
+    var url = 'http://yywallpaper.top/like/picture/remove/' + parseInt(imgId);
+    getPicture(url);
 }
 
 function saveStorage(storage){

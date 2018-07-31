@@ -5,6 +5,7 @@ import com.erniu.pictureweb.model.PictureItem;
 import com.erniu.pictureweb.model.page.PageImpl;
 import com.erniu.pictureweb.service.PictureService;
 import com.erniu.pictureweb.util.Constants;
+import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,8 +19,8 @@ import java.util.List;
  * Created by ErNiu on 2018/6/20.
  */
 @Service
+@Slf4j
 public class PictureServiceImpl implements PictureService {
-    private static final Logger LOGGER = LoggerFactory.getLogger(PictureServiceImpl.class);
 
     @Autowired
     private PictureItemMapper pictureItemMapper;
@@ -28,6 +29,28 @@ public class PictureServiceImpl implements PictureService {
     public PictureItem getPicById(Long id) {
         PictureItem item = pictureItemMapper.getById(id);
         return item;
+    }
+
+    @Override
+    public PageImpl<PictureItem> getPicByType(String title, Integer picType, Integer pageNum, Integer pageSize) {
+        if (pageSize < 1) {
+            pageSize = Constants.DEFAULT_PAGE_SIZE;
+        }
+        if (pageNum < 1) {
+            pageNum = Constants.DEFAULT_PAGE_NUMBER;
+        }
+        int minIndex = (pageNum - 1) * pageSize;
+        int totalNumber = 0;
+
+        List<PictureItem> ruleList = new ArrayList<>();
+        try {
+            //查询db状态
+            ruleList = pictureItemMapper.getPicByType(title, picType, minIndex, pageSize);
+            totalNumber = pictureItemMapper.getPicCount(title, picType, minIndex, pageSize);
+        } catch (Exception e) {
+            log.error("read picture form db failed", e);
+        }
+        return new PageImpl<>(pageNum, pageSize, totalNumber, ruleList);
     }
 
     @Override
@@ -47,7 +70,7 @@ public class PictureServiceImpl implements PictureService {
             ruleList = pictureItemMapper.getChosenPic(title, picType, minIndex, pageSize);
             totalNumber = pictureItemMapper.getPicCount(title, picType, minIndex, pageSize);
         } catch (Exception e) {
-            LOGGER.error("read picture form db failed", e);
+            log.error("read picture form db failed", e);
         }
         return new PageImpl<>(pageNum, pageSize, totalNumber, ruleList);
     }
@@ -58,7 +81,30 @@ public class PictureServiceImpl implements PictureService {
             pictureItem.setCreateTime(new Date());
             pictureItemMapper.insert(pictureItem);
         } catch (Exception e) {
-            LOGGER.error("insert picture to db failed", e);
+            log.error("insert picture to db failed", e);
+        }
+    }
+
+    @Override
+    public void likePic(Long imgId) {
+        try {
+            pictureItemMapper.likePic(imgId);
+        } catch (Exception e) {
+            log.error("like picture failed", e);
+        }
+    }
+
+    @Override
+    public void removeLikePic(Long imgId) {
+        try {
+            PictureItem item = pictureItemMapper.getById(imgId);
+            if (item == null || item.getLikeNum() == 0){
+                log.warn("the pic likeNum has been zero");
+                return;
+            }
+            pictureItemMapper.removeLikePic(imgId);
+        } catch (Exception e) {
+            log.error("remove like picture failed", e);
         }
     }
 }

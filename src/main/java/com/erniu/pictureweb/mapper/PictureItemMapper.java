@@ -24,6 +24,20 @@ public interface PictureItemMapper {
             + "</where>"
             + "ORDER BY id DESC LIMIT #{minIndex},#{pageSize}"
             + "</script>")
+    List<PictureItem> getPicByType(@Param(value = "title") String title, @Param(value = "picType") Integer picType,
+                                   @Param(value = "minIndex") Integer minIndex, @Param(value = "pageSize") Integer pageSize);
+
+    @Select("<script>"
+            + "SELECT * FROM `picture_item`"
+            + "<where>"
+            + "<if test='title != null'>"
+            + "<bind name='title' value=\"'%' + title + '%'\" />"
+            + " AND title like #{title}"
+            + "</if>"
+            + "<if test='picType !=null'>AND pic_type = #{picType}</if>"
+            + "</where>"
+            + "ORDER BY like_num DESC LIMIT #{minIndex},#{pageSize}"
+            + "</script>")
     List<PictureItem> getChosenPic(@Param(value = "title") String title, @Param(value = "picType") Integer picType,
                                    @Param(value = "minIndex") Integer minIndex, @Param(value = "pageSize") Integer pageSize);
 
@@ -51,5 +65,9 @@ public interface PictureItemMapper {
     @Delete("DELETE FROM picture_item WHERE id =#{id}")
     void delete(Long id);
 
+    @Update("UPDATE picture_item SET like_num = like_num + 1 WHERE id =#{imgId}")
+    void likePic(Long imgId);
 
+    @Update("UPDATE picture_item SET like_num = like_num - 1 WHERE id =#{imgId}")
+    void removeLikePic(Long imgId);
 }

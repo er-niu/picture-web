@@ -33,16 +33,16 @@ public class PictureController {
 
     @GetMapping("/chosen/picture/{pageNum}/{pageSize}")
     public Object findChosenPic(@PathVariable Integer pageNum, @PathVariable Integer pageSize) {
-        LOGGER.debug("-----received param pageNum:{},pageSize:{}", pageNum, pageSize);
-        PageImpl<PictureItem> picList = pictureService.getChosenPic(null, 0, pageNum, pageSize);
+        LOGGER.debug("-----findChosenPic received param pageNum:{},pageSize:{}", pageNum, pageSize);
+        PageImpl<PictureItem> picList = pictureService.getChosenPic(null, null, pageNum, pageSize);
         return JSON.toJSON(picList);
     }
 
     @RequestMapping("/query/picture")
     public Object findPicByType(@PathParam("title") String title, @PathParam("picType") Integer picType,
                                 @PathParam("pageNum") Integer pageNum, @PathParam("pageSize") Integer pageSize) {
-        LOGGER.debug("-----received param title:{} picType:{} pageNum:{},pageSize:{}", title, picType, pageNum, pageSize);
-        PageImpl<PictureItem> picList = pictureService.getChosenPic(title, picType, pageNum, pageSize);
+        LOGGER.debug("-----findPicByType received param title:{} picType:{} pageNum:{},pageSize:{}", title, picType, pageNum, pageSize);
+        PageImpl<PictureItem> picList = pictureService.getPicByType(title, picType, pageNum, pageSize);
         return JSON.toJSON(picList);
     }
 
@@ -50,6 +50,18 @@ public class PictureController {
     public void save(PictureItem item) {
         LOGGER.debug("-----received param item:{}", item.toString());
         pictureService.insertPic(item);
+    }
+
+    @RequestMapping("/like/picture/{id}")
+    public void likePic(@PathVariable Long id) {
+        LOGGER.debug("-----likePic received param id:{}", id);
+        pictureService.likePic(id);
+    }
+
+    @RequestMapping("/like/picture/remove/{id}")
+    public void removeLikePic(@PathVariable Long id) {
+        LOGGER.debug("-----removeLikePic received param id:{}", id);
+        pictureService.removeLikePic(id);
     }
 
 }
