@@ -25,6 +25,7 @@
     <link rel="stylesheet" type="text/css" href="assets/heart.css">
     <link rel="stylesheet" href="assets/style.css">
     <link rel="stylesheet" href="assets/spop.min.css">
+    <link rel="stylesheet" href="assets/search-bar.css">
     <style type="text/css">
         .font-style{
             color:#666;
@@ -65,14 +66,7 @@
                         <li class="font-style" th:each="type : ${typeList}" th:id="|picType${type.id}|">
                             <a th:href="|/classify/${type.id}|" th:text="${type.typeName}"></a>
                         </li>
-
-                        <!--<li class="font-style" id="picType0"><a href="/classify/0">小姐姐</a></li>
-                        <li class="font-style" id="picType5"><a href="/classify/5">小哥哥</a></li>
-                        <li class="font-style" id="picType3"><a href="/classify/3">动漫</a></li>
-                        <li class="font-style" id="picType1"><a href="/classify/1">风景</a></li>
-                        <li class="font-style" id="picType2"><a href="/classify/2">唯美</a></li>
-                        <li class="font-style" id="picType10"><a href="/classify/10">汽车</a></li>
-                        <li class="font-style" id="picType15"><a href="/classify/15">王者</a></li>-->
+                        <input type="search" placeholder="Search">
                     </ul>
 
                     <ul class="nav navbar-nav navbar-right">

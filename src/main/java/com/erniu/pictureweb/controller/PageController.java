@@ -22,22 +22,30 @@ public class PageController {
     @GetMapping("/")
     public String homePage(HttpServletRequest request, Model model) {
         List<PictureType> picList = pictureTypeService.getPictureType(1);
-        model.addAttribute("typeList",picList);
+        model.addAttribute("typeList", picList);
         return "index";
     }
 
     @GetMapping("/like")
     public String likePic(HttpServletRequest request, Model model) {
         List<PictureType> picList = pictureTypeService.getPictureType(1);
-        model.addAttribute("typeList",picList);
+        model.addAttribute("typeList", picList);
         return "like";
+    }
+
+    @GetMapping("/search/{title}")
+    public String searchPic(@PathVariable String title, Model model) {
+        List<PictureType> picList = pictureTypeService.getPictureType(1);
+        model.addAttribute("typeList", picList);
+        model.addAttribute("title", title);
+        return "search";
     }
 
     @GetMapping("/classify/{picType}")
     public String findByClassify(@PathVariable Long picType, HttpServletRequest request, Model model) {
         List<PictureType> picList = pictureTypeService.getPictureType(1);
-        request.setAttribute("picType", picType);
-        model.addAttribute("typeList",picList);
+        model.addAttribute("picType", picType);
+        model.addAttribute("typeList", picList);
         return "classify";
     }
 

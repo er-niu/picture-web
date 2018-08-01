@@ -31,10 +31,10 @@ public class PictureController {
         return JSON.toJSON(pictureItem);
     }
 
-    @GetMapping("/chosen/picture/{pageNum}/{pageSize}")
-    public Object findChosenPic(@PathVariable Integer pageNum, @PathVariable Integer pageSize) {
-        LOGGER.debug("-----findChosenPic received param pageNum:{},pageSize:{}", pageNum, pageSize);
-        PageImpl<PictureItem> picList = pictureService.getChosenPic(null, null, pageNum, pageSize);
+    @GetMapping("/chosen/picture/{pageNum}/{pageSize}/{title}")
+    public Object findChosenPic(@PathVariable Integer pageNum, @PathVariable Integer pageSize, @PathVariable String title) {
+        LOGGER.debug("-----findChosenPic received param pageNum:{},pageSize:{}, title:{}", pageNum, pageSize, title);
+        PageImpl<PictureItem> picList = pictureService.getChosenPic(title, null, pageNum, pageSize);
         return JSON.toJSON(picList);
     }
 
