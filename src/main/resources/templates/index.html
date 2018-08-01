@@ -66,7 +66,7 @@
                         <li class="font-style" th:each="type : ${typeList}" th:id="|picType${type.id}|">
                             <a th:href="|/classify/${type.id}|" th:text="${type.typeName}"></a>
                         </li>
-                        <input type="search" placeholder="Search">
+                        <input id="searchInput" type="search" placeholder="Search">
                     </ul>
 
                     <ul class="nav navbar-nav navbar-right">
@@ -193,6 +193,15 @@
 var pageNum = 1;//页码
 var pageSize = 10;//单页显示图片个数
 $(function(){
+
+    $('#searchInput').bind('keypress',function(event){
+        if(event.keyCode == 13){
+            var title = $('#searchInput').val();
+            var url = 'http://yywallpaper.top/search/' + title;
+            window.location.href = url;
+        }
+    });
+
     //初始化加载
     loadPage(pageNum,pageSize);
     //initPicNum();

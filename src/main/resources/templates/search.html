@@ -65,7 +65,7 @@
                         <li class="font-style" th:each="type : ${typeList}" th:id="|picType${type.id}|">
                             <a th:href="|/classify/${type.id}|" th:text="${type.typeName}"></a>
                         </li>
-                        <input type="search" placeholder="Search">
+                        <input id="searchInput" type="search" placeholder="Search">
                         <!--<li class="font-style" id="picType0"><a href="/classify/0">小姐姐</a></li>
                         <li class="font-style" id="picType5"><a href="/classify/5">小哥哥</a></li>
                         <li class="font-style" id="picType3"><a href="/classify/3">动漫</a></li>
@@ -196,23 +196,19 @@
 <script th:src="@{/assets/loadPic.js}"></script>
 <script th:src="@{/assets/spop.min.js}"></script>
 <script th:inline="javascript">
-	$("#likePic").addClass('active');
-	var json = loadStorage();//数据源
-	if(json == null || json == undefined || json == "" || json.length == 0){
-		var div = '';
-		div += '<div style="text-align:center;margin: 30px auto;font-size: 22px;color: #85878c;">';
-		div += '<p>啊哦...这里空空如也 >_<|||</p>'
-		div += '<p>您可以点击图片右下角的小心心❤❤❤</p>'
-		div += '<p>将美图收入囊中哦</p>'
-		div += '<div id="heart0" class="heart" rel="like" style="position: static;display: inline-block;height: 100px;width: 100px;" onclick="beatDemo(0)"></div>';
-		div += '</div>';
-		$('#works').append(div);
-	}
 	var pageNum = 0;//页码
     var pageSize = 10;//单页显示图片个数
     $(function(){
+        var title = [[${title}]];
+        $('#searchInput').bind('keypress',function(event){
+            if(event.keyCode == 13){
+                title = $('#searchInput').val();
+                var url = 'http://yywallpaper.top/search/' + title;
+                window.location.href = url;
+            }
+        });
         //初始化加载
-        loadLikePic(json,pageNum,pageSize);
+        searchPic(pageNum,pageSize,title);
         //滚动到底部触发加载
         $(window).scroll(function(event){
             var wScrollY = !!window.scrollY ? window.scrollY : window.pageYOffset; // 当前滚动条位置
@@ -220,7 +216,7 @@
             var bScrollH = document.body.scrollHeight; // 滚动条总高度
             if (wScrollY + wInnerH >= bScrollH * 0.95) { // 修正为滚动到90%即加载，避免个别设备出现奇怪的 wScrollY + wInnerH < bScrollH 的现象
                 pageNum ++;
-                loadLikePic(json,pageNum,pageSize);
+                searchPic(pageNum,pageSize,title);
             }
         });
         //mAlert('欢迎使用极简壁纸 <br>按 Ctrl+D 可以收藏到浏览器');

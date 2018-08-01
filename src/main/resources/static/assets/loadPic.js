@@ -35,6 +35,40 @@ function loadPage(pageNum,pageSize){
 }
 
 /** pageNum 页码 pageSize 一页显示几张 json 数据源 type 区分加载方式 */
+function searchPic(pageNum,pageSize, title){
+    var url = 'http://yywallpaper.top/chosen/picture/' + pageNum + '/' + pageSize + '/' + title;
+    var json = getPicture(url)
+    var picList = json.elements;
+	for (var i = 0; i < pageSize && i < picList.length; i++) {
+		var img = picList[i];
+		var urlSmall = img.smallUrl;
+		var urlBig = img.bigUrl;
+		var imgId = img.id;
+		var div = "";
+
+        div += '<figure class="effect-oscar  wowload fadeInUp">';
+        div += '<img src="'+urlSmall+'" alt="'+img.title+'"/>';
+        div += '<figcaption>';
+        div += '<a href="'+urlBig+'" title="" data-gallery>'+img.title+'</a>';
+        div += '<p>'+img.title+'</p>';
+        div += '</figcaption>';
+
+        // 加小心心
+        if(loadStorage().indexOf(imgId.toString()) >= 0){
+            div += '<div id="heart'+imgId+'" class="heart heartAnimation" rel="unlike" onclick="beatDemo('+imgId+')" style="background-position: right;" ></div>';
+        }else{
+            div += '<div id="heart'+imgId+'" class="heart" rel="like" onclick="beatDemo('+imgId+')"></div>';
+        }
+
+        div += '</figure>';
+
+		$('#works').append(div);
+	}
+	//初始化baguetteBox
+	//baguetteBox.run('.tz-gallery');
+}
+
+/** pageNum 页码 pageSize 一页显示几张 json 数据源 type 区分加载方式 */
 function loadPageByType(picType,pageNum,pageSize){
     var url = 'http://yywallpaper.top/query/picture';
 	var result = null;

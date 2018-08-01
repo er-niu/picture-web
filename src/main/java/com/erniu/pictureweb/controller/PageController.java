@@ -2,6 +2,7 @@ package com.erniu.pictureweb.controller;
 
 import com.erniu.pictureweb.model.PictureType;
 import com.erniu.pictureweb.service.PictureTypeService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,6 +15,7 @@ import java.util.List;
 
 @Controller
 @CrossOrigin
+@Slf4j
 public class PageController {
 
     @Autowired
@@ -35,6 +37,7 @@ public class PageController {
 
     @GetMapping("/search/{title}")
     public String searchPic(@PathVariable String title, Model model) {
+        log.info("received param:{}", title);
         List<PictureType> picList = pictureTypeService.getPictureType(1);
         model.addAttribute("typeList", picList);
         model.addAttribute("title", title);

@@ -65,7 +65,7 @@
                         <li class="font-style" th:each="type : ${typeList}" th:id="|picType${type.id}|">
                             <a th:href="|/classify/${type.id}|" th:text="${type.typeName}"></a>
                         </li>
-                        <input type="search" placeholder="Search">
+                        <input id="searchInput" type="search" placeholder="Search">
                         <!--<li class="font-style" id="picType0"><a href="/classify/0">小姐姐</a></li>
                         <li class="font-style" id="picType5"><a href="/classify/5">小哥哥</a></li>
                         <li class="font-style" id="picType3"><a href="/classify/3">动漫</a></li>
@@ -202,6 +202,13 @@
     var pageSize = 10;//单页显示图片个数
     $(function(){
         //初始化加载
+        $('#searchInput').bind('keypress',function(event){
+            if(event.keyCode == 13){
+                var title = $('#searchInput').val();
+                var url = 'http://yywallpaper.top/search/' + title;
+                window.location.href = url;
+            }
+        });
         loadPageByType(picType,pageNum,pageSize);
         //滚动到底部触发加载
         $(window).scroll(function(event){
