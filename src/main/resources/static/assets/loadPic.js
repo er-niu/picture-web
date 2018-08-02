@@ -36,7 +36,7 @@ function loadPage(pageNum,pageSize){
 
 /** pageNum 页码 pageSize 一页显示几张 json 数据源 type 区分加载方式 */
 function searchPic(pageNum,pageSize, title){
-    var url = 'http://yywallpaper.top/chosen/picture/' + pageNum + '/' + pageSize + '/' + title;
+    var url = 'http://yywallpaper.top/search/picture/' + pageNum + '/' + pageSize + '/' + title;
     var json = getPicture(url)
     var picList = json.elements;
 	for (var i = 0; i < pageSize && i < picList.length; i++) {
