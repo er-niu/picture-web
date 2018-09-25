@@ -1,15 +1,18 @@
 package com.erniu.pictureweb.controller;
 
 import com.alibaba.fastjson.JSON;
+import com.erniu.pictureweb.handler.PictureShowHandler;
 import com.erniu.pictureweb.model.PictureItem;
 import com.erniu.pictureweb.model.page.PageImpl;
 import com.erniu.pictureweb.service.PictureService;
+import com.erniu.pictureweb.util.Constants;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.websocket.server.PathParam;
+import java.text.SimpleDateFormat;
 
 /**
  * @Description : 图片浏览http接口
@@ -35,6 +38,7 @@ public class PictureController {
     public Object searchChosenPic(@PathVariable Integer pageNum, @PathVariable Integer pageSize, @PathVariable String title) {
         LOGGER.debug("-----findChosenPic received param pageNum:{},pageSize:{}, title:{}", pageNum, pageSize, title);
         PageImpl<PictureItem> picList = pictureService.getChosenPic(title, null, pageNum, pageSize);
+        PictureShowHandler.handlePictureShow(picList.getElements());
         return JSON.toJSON(picList);
     }
 
@@ -42,6 +46,7 @@ public class PictureController {
     public Object findChosenPic(@PathVariable Integer pageNum, @PathVariable Integer pageSize) {
         LOGGER.debug("-----findChosenPic received param pageNum:{},pageSize:{}, title:{}", pageNum);
         PageImpl<PictureItem> picList = pictureService.getChosenPic(null, null, pageNum, pageSize);
+        PictureShowHandler.handlePictureShow(picList.getElements());
         return JSON.toJSON(picList);
     }
 
@@ -50,6 +55,7 @@ public class PictureController {
                                 @PathParam("pageNum") Integer pageNum, @PathParam("pageSize") Integer pageSize) {
         LOGGER.debug("-----findPicByType received param title:{} picType:{} pageNum:{},pageSize:{}", title, picType, pageNum, pageSize);
         PageImpl<PictureItem> picList = pictureService.getPicByType(title, picType, pageNum, pageSize);
+        PictureShowHandler.handlePictureShow(picList.getElements());
         return JSON.toJSON(picList);
     }
 

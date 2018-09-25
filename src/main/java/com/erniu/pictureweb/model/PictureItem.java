@@ -46,4 +46,8 @@ public class PictureItem {
      * 图片更新时间
      */
     private Date createTime;
+    /**
+     * 图片显示时间
+     */
+    private String showTime;
 }

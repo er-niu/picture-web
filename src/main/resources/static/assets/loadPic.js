@@ -17,6 +17,7 @@ function loadPage(pageNum,pageSize){
         div += '<figcaption>';
         div += '<a href="'+urlBig+'" title="" data-gallery>'+img.title+'</a>';
         div += '<p>'+img.title+'</p>';
+        div += '<p>'+img.showTime+'</p>';
         div += '</figcaption>';
 
         // 加小心心
@@ -51,6 +52,7 @@ function searchPic(pageNum,pageSize, title){
         div += '<figcaption>';
         div += '<a href="'+urlBig+'" title="" data-gallery>'+img.title+'</a>';
         div += '<p>'+img.title+'</p>';
+        div += '<p>'+img.showTime+'</p>';
         div += '</figcaption>';
 
         // 加小心心
@@ -96,6 +98,7 @@ function loadPageByType(picType,pageNum,pageSize){
         div += '<figcaption>';
         div += '<a href="'+urlBig+'" title="" data-gallery>'+img.title+'</a>';
         div += '<p>'+img.title+'</p>';
+        div += '<p>'+img.showTime+'</p>';
         div += '</figcaption>';
 
         // 加小心心
@@ -128,6 +131,7 @@ function loadLikePic(json,pageNum,pageSize){
         div += '<figcaption>';
         div += '<a href="'+urlBig+'" title="" data-gallery>'+img.title+'</a>';
         div += '<p>'+img.title+'</p>';
+        div += '<p>'+img.showTime+'</p>';
         div += '</figcaption>';
 
         // 加小心心
