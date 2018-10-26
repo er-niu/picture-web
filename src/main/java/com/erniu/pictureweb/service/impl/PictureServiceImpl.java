@@ -41,7 +41,6 @@ public class PictureServiceImpl implements PictureService {
         }
         int minIndex = (pageNum - 1) * pageSize;
         int totalNumber = 0;
-
         List<PictureItem> ruleList = new ArrayList<>();
         try {
             //查询db状态

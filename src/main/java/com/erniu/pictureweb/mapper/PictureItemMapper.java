@@ -10,11 +10,11 @@ import java.util.List;
  */
 public interface PictureItemMapper {
 
-    @Select("SELECT * FROM picture_item WHERE id = #{id}")
+    @Select("SELECT * FROM t_picture_item WHERE id = #{id}")
     PictureItem getById(Long id);
 
     @Select("<script>"
-            + "SELECT * FROM `picture_item`"
+            + "SELECT * FROM `t_picture_item`"
             + "<where>"
             + "<if test='title != null'>"
             + "<bind name='title' value=\"'%' + title + '%'\" />"
@@ -28,7 +28,7 @@ public interface PictureItemMapper {
                                    @Param(value = "minIndex") Integer minIndex, @Param(value = "pageSize") Integer pageSize);
 
     @Select("<script>"
-            + "SELECT * FROM `picture_item`"
+            + "SELECT * FROM `t_picture_item`"
             + "<where>"
             + "<if test='title != null'>"
             + "<bind name='title' value=\"'%' + title + '%'\" />"
@@ -42,7 +42,7 @@ public interface PictureItemMapper {
                                    @Param(value = "minIndex") Integer minIndex, @Param(value = "pageSize") Integer pageSize);
 
     @Select("<script>"
-            + "SELECT COUNT(1) FROM `picture_item`"
+            + "SELECT COUNT(1) FROM `t_picture_item`"
             + "<where>"
             + "<if test='title != null'>"
             + "<bind name='title' value=\"'%' + title + '%'\" />"
@@ -54,20 +54,20 @@ public interface PictureItemMapper {
     Integer getPicCount(@Param(value = "title") String title, @Param(value = "picType") Integer picType,
                         @Param(value = "minIndex") Integer minIndex, @Param(value = "pageSize") Integer pageSize);
 
-    @Insert("INSERT INTO picture_item(title,pic_desc,big_url,small_url,length,width,like_num,pic_type,create_time)" +
+    @Insert("INSERT INTO t_picture_item(title,pic_desc,big_url,small_url,length,width,like_num,pic_type,create_time)" +
             "VALUES(#{title}, #{picDesc}, #{bigUrl}, #{smallUrl}, #{length}, #{width}, #{likeNum}, #{picType}, #{createTime})")
     void insert(PictureItem user);
 
-    @Update("UPDATE picture_item SET title=#{title},pic_desc=#{picDesc},big_url=#{bigUrl},small_url=#{smallUrl}," +
+    @Update("UPDATE t_picture_item SET title=#{title},pic_desc=#{picDesc},big_url=#{bigUrl},small_url=#{smallUrl}," +
             "length=#{length},width=#{width},like_num=#{likeNum},pic_type=#{picType},create_time=#{createTime} WHERE id =#{id}")
     void update(PictureItem user);
 
-    @Delete("DELETE FROM picture_item WHERE id =#{id}")
+    @Delete("DELETE FROM t_picture_item WHERE id =#{id}")
     void delete(Long id);
 
-    @Update("UPDATE picture_item SET like_num = like_num + 1 WHERE id =#{imgId}")
+    @Update("UPDATE t_picture_item SET like_num = like_num + 1 WHERE id =#{imgId}")
     void likePic(Long imgId);
 
-    @Update("UPDATE picture_item SET like_num = like_num - 1 WHERE id =#{imgId}")
+    @Update("UPDATE t_picture_item SET like_num = like_num - 1 WHERE id =#{imgId}")
     void removeLikePic(Long imgId);
 }

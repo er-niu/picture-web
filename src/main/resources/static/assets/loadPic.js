@@ -1,8 +1,10 @@
 var local_storage_key = "yywallpaper"
+//var url_pre = "http://localhost:8080"
+var url_pre = "http://yywallpaper.top"
 
 /** pageNum 页码 pageSize 一页显示几张 json 数据源 type 区分加载方式 */
 function loadPage(pageNum,pageSize){
-    var url = 'http://yywallpaper.top/chosen/picture/' + pageNum + '/' + pageSize;
+    var url = url_pre + '/chosen/picture/' + pageNum + '/' + pageSize;
     var json = getPicture(url)
     var picList = json.elements;
 	for (var i = 0; i < pageSize && i < picList.length; i++) {
@@ -37,7 +39,7 @@ function loadPage(pageNum,pageSize){
 
 /** pageNum 页码 pageSize 一页显示几张 json 数据源 type 区分加载方式 */
 function searchPic(pageNum,pageSize, title){
-    var url = 'http://yywallpaper.top/search/picture/' + pageNum + '/' + pageSize + '/' + title;
+    var url = url_pre + '/search/picture/' + pageNum + '/' + pageSize + '/' + title;
     var json = getPicture(url)
     var picList = json.elements;
 	for (var i = 0; i < pageSize && i < picList.length; i++) {
@@ -72,7 +74,7 @@ function searchPic(pageNum,pageSize, title){
 
 /** pageNum 页码 pageSize 一页显示几张 json 数据源 type 区分加载方式 */
 function loadPageByType(picType,pageNum,pageSize){
-    var url = 'http://yywallpaper.top/query/picture';
+    var url = url_pre + '/query/picture';
 	var result = null;
 	$.ajax({
 	    type: 'POST',
@@ -120,7 +122,7 @@ function loadPageByType(picType,pageNum,pageSize){
 function loadLikePic(json,pageNum,pageSize){
 	for (var i = pageNum * pageSize; i < (pageNum + 1) * pageSize && i < json.length; i++) {
         var imgId = json[i];
-        var url = 'http://yywallpaper.top/picture/' + parseInt(imgId);
+        var url = url_pre + '/picture/' + parseInt(imgId);
         var img = getPicture(url);
         var urlSmall = img.smallUrl;
         var urlBig = img.bigUrl;
@@ -205,7 +207,7 @@ function addPicToStorage(imgId){
 	if(storage.indexOf(imgId.toString()) < 0){
 		storage.unshift(imgId);
 		saveStorage(storage);
-        var url = 'http://yywallpaper.top/like/picture/' + parseInt(imgId);
+        var url = url_pre + '/like/picture/' + parseInt(imgId);
         getPicture(url);
 	}
 }
@@ -218,7 +220,7 @@ function removePicFromStorage(imgId){
         storage.splice(img_index, 1);
     }
 	saveStorage(storage);
-    var url = 'http://yywallpaper.top/like/picture/remove/' + parseInt(imgId);
+    var url = url_pre + '/like/picture/remove/' + parseInt(imgId);
     getPicture(url);
 }
 

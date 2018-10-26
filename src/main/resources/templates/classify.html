@@ -200,12 +200,15 @@
 	$('#picType'+picType).addClass('active');
 	var pageNum = 1;//页码
     var pageSize = 10;//单页显示图片个数
+    //var url_pre = "http://localhost:8080"
+    var url_pre = "http://yywallpaper.top"
+
     $(function(){
         //初始化加载
         $('#searchInput').bind('keypress',function(event){
             if(event.keyCode == 13){
                 var title = $('#searchInput').val();
-                var url = 'http://yywallpaper.top/search/' + title;
+                var url = url_pre + '/search/' + title;
                 window.location.href = url;
             }
         });
