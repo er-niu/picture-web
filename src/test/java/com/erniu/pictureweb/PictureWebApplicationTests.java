@@ -3,6 +3,7 @@ package com.erniu.pictureweb;
 import com.erniu.pictureweb.model.PictureItem;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
@@ -35,6 +36,15 @@ public class PictureWebApplicationTests {
         list.stream().forEach(item -> System.out.println(item.getBigUrl() + item.getTitle()));
 
 
+    }
+
+    @Test
+    public void testBCrypt(){
+        String passwd = "123456";
+        String hash = BCrypt.hashpw(passwd, BCrypt.gensalt());
+        System.out.println(hash);
+        BCrypt.checkpw(passwd, hash);
+        System.out.println(BCrypt.checkpw(passwd, "$2a$10$/U20ZiBtof9TOpuCr9Qne.DlzNQ387jsFpzuFV94tNOwux5jNuWRO"));
     }
 
 
