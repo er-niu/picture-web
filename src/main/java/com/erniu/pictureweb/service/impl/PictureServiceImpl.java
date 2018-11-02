@@ -123,7 +123,9 @@ public class PictureServiceImpl implements PictureService {
                 pictureItemMapper.delete(picId);
                 // 删除腾讯cos存储
                 String key = String.valueOf(picId) + ".jpg";
+                String smallKey = "small/" + String.valueOf(picId) + ".jpg";
                 cosClientUtil.deleteObject(key);
+                cosClientUtil.deleteObject(smallKey);
             });
         } catch (Exception e) {
             log.error("remove picture failed", e);
