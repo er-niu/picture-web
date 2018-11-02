@@ -77,4 +77,11 @@ public class PictureController {
         pictureService.removeLikePic(id);
     }
 
+    @RequestMapping("/del/picture/bytime/")
+    public int delPictureByTime(@PathParam("startTime") String startTime, @PathParam("endTime") String endTime) {
+        LOGGER.debug("-----delPictureByTime received param startTime:{} endTime:{}", startTime, endTime);
+        Integer integer = pictureService.delPictureByTime(startTime, endTime);
+        return integer;
+    }
+
 }

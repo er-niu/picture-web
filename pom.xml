@@ -25,6 +25,7 @@
         <dep.lombok.version>1.16.16</dep.lombok.version>
         <dep.fastjson.version>1.2.47</dep.fastjson.version>
         <docker.image.prefix>picture-web</docker.image.prefix>
+        <cos_api.version>5.4.6</cos_api.version>
     </properties>
 
     <dependencies>
@@ -76,6 +77,13 @@
             <artifactId>jbcrypt</artifactId>
             <version>0.3m</version>
         </dependency>
+
+        <dependency>
+            <groupId>com.qcloud</groupId>
+            <artifactId>cos_api</artifactId>
+            <version>${cos_api.version}</version>
+        </dependency>
+
     </dependencies>
 
     <build>

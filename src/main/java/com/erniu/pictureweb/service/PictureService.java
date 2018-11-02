@@ -3,6 +3,9 @@ package com.erniu.pictureweb.service;
 import com.erniu.pictureweb.model.PictureItem;
 import com.erniu.pictureweb.model.page.PageImpl;
 
+import java.util.Date;
+import java.util.List;
+
 /**
  * Created by ErNiu on 2018/6/20.
  */
@@ -30,4 +33,12 @@ public interface PictureService {
      * @param imgId
      */
     void removeLikePic(Long imgId);
+
+    /**
+     * 根据时间查询图片
+     * @param startTime
+     * @param endTime
+     * @return
+     */
+    Integer delPictureByTime(String startTime, String endTime);
 }

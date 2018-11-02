@@ -5,6 +5,7 @@ import com.erniu.pictureweb.model.PictureItem;
 import com.erniu.pictureweb.model.page.PageImpl;
 import com.erniu.pictureweb.service.PictureService;
 import com.erniu.pictureweb.util.Constants;
+import com.erniu.pictureweb.util.CosClientUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -24,6 +25,9 @@ public class PictureServiceImpl implements PictureService {
 
     @Autowired
     private PictureItemMapper pictureItemMapper;
+
+    @Autowired
+    private CosClientUtil cosClientUtil;
 
     @Override
     public PictureItem getPicById(Long id) {
@@ -97,7 +101,7 @@ public class PictureServiceImpl implements PictureService {
     public void removeLikePic(Long imgId) {
         try {
             PictureItem item = pictureItemMapper.getById(imgId);
-            if (item == null || item.getLikeNum() == 0){
+            if (item == null || item.getLikeNum() == 0) {
                 log.warn("the pic likeNum has been zero");
                 return;
             }
@@ -105,5 +109,25 @@ public class PictureServiceImpl implements PictureService {
         } catch (Exception e) {
             log.error("remove like picture failed", e);
         }
+    }
+
+    @Override
+    public Integer delPictureByTime(String startTime, String endTime) {
+        Integer delCount = 0;
+        try {
+            List<PictureItem> pictures = pictureItemMapper.getPictureByTime(startTime, endTime);
+            delCount = pictures.size();
+            pictures.forEach(pictureItem -> {
+                // 删除数据库图片
+                Long picId = pictureItem.getId();
+                pictureItemMapper.delete(picId);
+                // 删除腾讯cos存储
+                String key = String.valueOf(picId) + ".jpg";
+                cosClientUtil.deleteObject(key);
+            });
+        } catch (Exception e) {
+            log.error("remove picture failed", e);
+        }
+        return delCount;
     }
 }

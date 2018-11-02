@@ -3,6 +3,7 @@ package com.erniu.pictureweb.mapper;
 import com.erniu.pictureweb.model.PictureItem;
 import org.apache.ibatis.annotations.*;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -70,4 +71,14 @@ public interface PictureItemMapper {
 
     @Update("UPDATE t_picture_item SET like_num = like_num - 1 WHERE id =#{imgId}")
     void removeLikePic(Long imgId);
+
+    @Select("<script>"
+            + "SELECT * FROM `t_picture_item`"
+            + "<where>"
+            + "<if test='startTime !=null'>"
+            + "AND create_time BETWEEN #{startTime} AND #{endTime}"
+            + "</if>"
+            + "</where>"
+            + "</script>")
+    List<PictureItem> getPictureByTime(@Param(value = "startTime") String startTime, @Param(value = "endTime") String endTime);
 }
