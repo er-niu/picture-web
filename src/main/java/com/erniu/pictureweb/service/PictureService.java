@@ -40,5 +40,5 @@ public interface PictureService {
      * @param endTime
      * @return
      */
-    Integer delPictureByTime(String startTime, String endTime);
+    Integer delPictureByTime(String startTime, String endTime, Integer picType);
 }

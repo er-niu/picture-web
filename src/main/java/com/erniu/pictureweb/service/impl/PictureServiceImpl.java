@@ -112,10 +112,10 @@ public class PictureServiceImpl implements PictureService {
     }
 
     @Override
-    public Integer delPictureByTime(String startTime, String endTime) {
+    public Integer delPictureByTime(String startTime, String endTime, Integer picType) {
         Integer delCount = 0;
         try {
-            List<PictureItem> pictures = pictureItemMapper.getPictureByTime(startTime, endTime);
+            List<PictureItem> pictures = pictureItemMapper.getPictureByTime(startTime, endTime, picType);
             delCount = pictures.size();
             pictures.forEach(pictureItem -> {
                 // 删除数据库图片

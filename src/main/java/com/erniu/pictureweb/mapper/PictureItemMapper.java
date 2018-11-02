@@ -78,7 +78,10 @@ public interface PictureItemMapper {
             + "<if test='startTime !=null'>"
             + "AND create_time BETWEEN #{startTime} AND #{endTime}"
             + "</if>"
+            + "<if test='picType !=null'>"
+            + "AND pic_type = #{picType}"
+            + "</if>"
             + "</where>"
             + "</script>")
-    List<PictureItem> getPictureByTime(@Param(value = "startTime") String startTime, @Param(value = "endTime") String endTime);
+    List<PictureItem> getPictureByTime(@Param(value = "startTime") String startTime, @Param(value = "endTime") String endTime, @Param(value = "picType") Integer picType);
 }

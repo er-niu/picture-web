@@ -78,9 +78,9 @@ public class PictureController {
     }
 
     @RequestMapping("/del/picture/bytime/")
-    public int delPictureByTime(@PathParam("startTime") String startTime, @PathParam("endTime") String endTime) {
+    public int delPictureByTime(@PathParam("startTime") String startTime, @PathParam("endTime") String endTime, @PathParam("picType") Integer picType) {
         LOGGER.debug("-----delPictureByTime received param startTime:{} endTime:{}", startTime, endTime);
-        Integer integer = pictureService.delPictureByTime(startTime, endTime);
+        Integer integer = pictureService.delPictureByTime(startTime, endTime, picType);
         return integer;
     }
 
