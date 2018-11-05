@@ -196,7 +196,9 @@
 <script src="https://static-1256975408.cos.ap-chengdu.myqcloud.com/assets/loadPic.js"></script>
 <script src="https://static-1256975408.cos.ap-chengdu.myqcloud.com/assets/spop.min.js"></script>
 <script th:inline="javascript">
-$("#likePic").addClass('active');
+$('#likePic').addClass('active');
+$('#picType').addClass('active');
+
 var json = loadStorage();//数据源
 if(json == null || json == undefined || json == "" || json.length == 0){
 var div = '';
