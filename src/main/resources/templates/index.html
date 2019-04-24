@@ -72,11 +72,19 @@
                         <input id="searchInput" type="search" placeholder="Search">
                     </ul>
 
+                    <!--<ul class="nav navbar-nav navbar-right">-->
+                        <!--<li><a class="font-style" id="likePic" href="/like">我的</a></li>-->
+                        <!--<li><a class="font-style" href="#" data-toggle="modal" data-target="#modal2">关于</a></li>-->
+                        <!--<li><a class="font-style" href="#" data-toggle="modal" data-target="#modal1"> 打赏 </a></li>-->
+                    <!--</ul>-->
+
                     <ul class="nav navbar-nav navbar-right">
+                        <li><a class="font-style" href="#" data-toggle="modal" data-target="#modal4">登录</a></li>
                         <li><a class="font-style" id="likePic" href="/like">我的</a></li>
                         <li><a class="font-style" href="#" data-toggle="modal" data-target="#modal2">关于</a></li>
                         <li><a class="font-style" href="#" data-toggle="modal" data-target="#modal1"> 打赏 </a></li>
                     </ul>
+
                 </div>
                 <!-- #Nav Ends -->
             </div>
@@ -173,6 +181,79 @@
     </div>
 </div>
 
+
+<div class="modal fade" id="modal4" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"> &times;</button>
+                <h4 class="modal-title"> 登录 </h4>
+            </div>
+            <div class="modal-body">
+                <!--<h3 style="text-align:center;margin-top: 10px;">登录</h3>-->
+                <p id="msg4" style="text-align:center;font-size: 16px">登录后，可以自动云同步喜欢的图片到云端，换电脑也不会丢失</p>
+                <div class="form-group">
+                    <label for="username4">用户名</label>
+                    <input class="form-control" type="text" placeholder="请输入你的用户名" id="username4" style="margin-left: 0px; padding-right: 18px; margin-top: 10px;">
+                </div>
+                <div class="form-group">
+                    <label for="password4" style="margin-top: 10px;">密码</label>
+                    <input class="form-control" type="password" placeholder="请输入你的密码" id="password4" style="margin-left: 0px; margin-top: 10px;">
+                </div>
+                <div class="row clearfix">
+                    <div class="col-md-12 column">
+                        <button type="button" class="btn btn-default btn-primary" style="height: 40px; padding-top: 0px; padding-bottom: 0px;margin-top: 20px;">登录</button>
+                    </div>
+                </div>
+                <br/><br/>
+                <a href="" data-toggle="modal" data-dismiss="modal" data-target="#modal5"
+                   style="color: #F00;font-weight: bold;font-size: 20px;">还没有账号？点我注册</a>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="modal5" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"> &times;</button>
+                <h4 class="modal-title"> 注册 </h4>
+            </div>
+            <div class="modal-body">
+                <!--<h3 style="text-align:center;margin-top: 10px;">注册</h3>-->
+                <p id="msg5" style="text-align:center;font-size: 16px">手机号和邮箱可以用于以后忘记密码时找回密码</p>
+                <div class="form-group">
+                    <label for="username5">用户名</label>
+                    <input class="form-control" type="text" placeholder="可以是 汉字 字母 数字，长度不超过32个字即可" id="username5" style="margin-left: 0px; margin-top: 10px;">
+                </div>
+                <div class="form-group">
+                    <label for="password5">密码</label>
+                    <input class="form-control" type="password" placeholder="可以是 数字 字母，长度至少6位" id="password5" style="margin-left: 0px; margin-top: 10px;">
+                </div>
+                <div class="form-group">
+                    <label for="password52">再次输入密码</label>
+                    <input class="form-control" type="password" placeholder="可以是 数字 字母，长度至少6位" id="password52" style="margin-left: 0px; margin-top: 10px;">
+                </div>
+                <div class="form-group">
+                    <label for="email5">邮箱</label>
+                    <input class="form-control" type="email" placeholder="输入你的邮箱，请妥善填写，用于找回密码" id="email5" style="margin-left: 0px; margin-top: 10px;">
+                </div>
+                <div class="form-group">
+                    <label for="mobile5">手机</label>
+                    <input class="form-control" type="text" placeholder="输入你的手机号，请妥善填写，用于找回密码" id="mobile5" style="margin-left: 0px; margin-top: 10px;">
+                </div>
+                <div class="text-right">
+                    <button class="btn btn-primary" id="register" onclick="register()" style="height: 40px ; padding-top: 0px; padding-bottom: 0px;margin-top: 20px;">注册</button>
+                </div>
+                <br/>
+                <a href="" data-toggle="modal" data-dismiss="modal" data-target="#modal4"
+                   style="color: #F00;font-weight: bold;font-size: 20px;">已有账号？点我登录</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+
 <!-- jquery -->
 <script src="https://static-1256975408.cos.ap-chengdu.myqcloud.com/assets/jquery.js"></script>
 
@@ -194,6 +275,7 @@
 <script src="https://static-1256975408.cos.ap-chengdu.myqcloud.com/assets/loadPic.js"></script>
 <script src="https://static-1256975408.cos.ap-chengdu.myqcloud.com/assets/spop.min.js"></script>
 <script type="text/javascript">
+
 var pageNum = 1;//页码
 var pageSize = 10;//单页显示图片个数
 $(function(){
